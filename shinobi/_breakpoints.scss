@@ -1,0 +1,69 @@
+//se define un mapa llamado breakpoints. Contiene diferentes breakpoints y sus respectivos valores. Cada mixin define un media query para un breakpoint específico, y el contenido de los mixins y del mixin breakpoint() se aplica dentro de esos media queries. Con esto se crean estilos responsivos.
+
+$breakpoints: (
+    //cada clave es un breakpoint. y el valor representa el tamaño en pizeles.
+    "xs": 0,
+    "sm": 480px,
+    "md": 720px,
+    "lg": 960px,
+    "xl": 1200px
+);
+
+//se crean mixins para generar las reglas de estilo dentro de las media queries correspondientes a cada breakpoint.
+@mixin xs {
+    //funcion map-get() se usa para obtener el valor del breakpoint
+    @media (min-width: map-get($breakpoints, "xs")) {
+        //bloque de contenido content q se aplicara dentro del media query
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (min-width: map-get($breakpoints, "sm")) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (min-width: map-get($breakpoints, "md")) {
+        @content;
+    }
+}
+@mixin lg {
+    @media (min-width: map-get($breakpoints, "lg")) {
+        @content;
+    }
+}
+@mixin xl {
+    @media (min-width: map-get($breakpoints, "xl")) {
+        @content;
+    }
+}
+
+@mixin breakpoint($bp: 0) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
+// se define una clase que utiliza los mixins anteriores para aplicar diferentes estilos en funcion de los breakpoints definidos.
+    .responsive-test {
+    @include xs {
+        color: red;
+    }
+    @include sm {
+        color: blue;
+    }
+    @include md {
+        color: green;
+    }
+    @include lg {
+        color: purple;
+    }
+    @include xl {
+        color: orange;
+    }
+    @include breakpoint(1400px) {
+        color: pink;
+    }
+}
